@@ -1,0 +1,66 @@
+<%- include('../partials/header.ejs') %>
+
+
+<div class="container mt-4">
+    <h2 class="mb-3"> <%= user.firstName%> <%= user.lastName%>'s Events</h2>
+    <% if (events.length) { %>
+        <table class="table table-hover show-table-custom"> 
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-left">Title</th>
+                    <th scope="col" class="text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% events.forEach(event => { %>
+                    <tr>
+                        <td class="text-left"><%= event.title %></td>
+                        <td class="text-left">
+                            <a href="/events/<%= event._id %>" class="btn btn-sm btn-info mr-2">View</a>
+                            <a href="/events/<%= event.id %>/edit" class="btn btn-sm btn-warning mr-2">Edit</a>
+                            <form action="/events/<%= event.id %>?_method=DELETE" method="POST" class="d-inline-block">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>You haven't created any events yet.</p>
+    <% } %>
+
+    <h2 class="mb-3"> <%= user.firstName%> <%= user.lastName%>'s RSVPs</h2>
+    <% if (rsvps.length) { %>
+        <table class="table table-hover show-table-custom"> 
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-left">Title</th>
+                    <th scope="col" class="text-left">Attending?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rsvps.forEach(rsvp => { %>
+                    <tr>
+                        <td class="text-left" > 
+                                <% if (rsvp.event) { %>
+                                <a class ="rsvp-link" href="/events/<%= rsvp.event._id %>"><%= rsvp.event.title %></a> 
+                            <% } else { %>
+                                N/A
+                            <% } %>
+                        </td>
+                        <td class="text-left">
+                             <%= rsvp.status %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+                    
+        </table>
+    <% } else { %>
+        <p>You don't have any RSVPs yet.</p>
+    <% } %>
+</div>
+
+
+<%- include('../partials/footer.ejs') %>

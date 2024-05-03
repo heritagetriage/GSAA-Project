@@ -1,0 +1,42 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="main-body">
+    <div class="container body-container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h5><strong>Login to Your Account</strong></h5>
+            </div>
+        </div>
+        <form method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
+            <!-- Email -->
+            <div class="form-row align-items-center">
+                <div class="col-sm-3">
+                    <label for="emailLogin">Email:</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" id="emailLogin" name="email" placeholder="Enter your email" required>
+                </div>
+            </div>
+            <!-- Password -->
+            <div class="form-row align-items-center">
+                <div class="col-sm-3">
+                    <label for="passwordLogin">Password:</label>
+                </div>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="passwordLogin" name="password" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-12">
+                <p>Don't have an account? <a href="/users/signup">Sign up here</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,36 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container mt-4">
+    <% if(events.length > 0) { %>
+        <% const sortedEvents = events.sort((a, b) => {
+            // Sort by category first
+            if (a.category < b.category) return -1;
+            if (a.category > b.category) return 1;
+            // If categories are the same, sort by date
+            return new Date(a.startDate) - new Date(b.startDate);
+        }); %>
+
+        <% let currentCategory = null; %>
+        <% sortedEvents.forEach(event => { %>
+            <% if (event.category !== currentCategory) { %>
+                <% if (currentCategory !== null) { %>
+                    </div> 
+                <% } %>
+                <div class="mb-4">
+                    <h2 class="mb-3"><strong><%= event.category %></strong></h2>
+                    <ul class="list-group list-group-flush">
+                <% currentCategory = event.category; %>
+            <% } %>
+            <li class="list-group-item border-0">
+                <a href="/events/<%= event._id %>" class="event-title-link"><%= event.title %></a>
+            </li>
+        <% }); %>
+                    </ul>
+                </div> 
+    <% } else { %>
+        <p> <h3>There are no events to show.</h3></p>
+    <% } %>
+</div>
+
+<%- include('../partials/footer.ejs') %>
+
